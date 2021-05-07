@@ -419,3 +419,14 @@ func Receive() {
 指针数组（类型是数组，数组的每一个元素都是指针）
 数组指针（一个数组的指针）
 
+### json
+
+序列化和反序列化
+tag
+```go
+type Server struct {
+	ServerName string `json:"server_name"` // `json:"key"` 转化成json后的key是后面的key，映射关系
+	ServerIp string `json:"server_ip"`
+	ServerPort int `json:"server_port"`
+}
+```

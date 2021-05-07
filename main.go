@@ -4,13 +4,23 @@ import (
 	"errors"
 	"fmt"
 	"go_demo1/interface_demo"
-	"go_demo1/point_demo"
+	"go_demo1/json_demo"
 	"reflect"
 )
 
 func main() {
+	// 反序列化json
+	json_demo.DeSerializeStruct()
+	json_demo.DeSerializeMap()
+
+	// map 转化json
+	//json_demo.SerializeMap()
+
+	// 结构体转化json
+	//json_demo.SerializeStruct()
+
 	// 指针数组
-	point_demo.TestPointArr()
+	//point_demo.TestPointArr()
 
 
 	// 指针创建
