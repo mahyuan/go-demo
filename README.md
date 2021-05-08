@@ -430,3 +430,72 @@ type Server struct {
 	ServerPort int `json:"server_port"`
 }
 ```
+
+### go module
+go 语言依赖管理工具
+go.mod文件和go.sum文件
+
+go.mod文件：
+```mod
+module go_demo1
+go 1.16
+
+require (
+	github.com/DeanThompson/ginpprof v0.0.0-20190408063150-3be636683586
+	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
+	github.com/go-redis/redis v6.15.6+incompatible
+	)
+```
+
+go.mod定义其所在目录为一个模块
+
+go.sum文件用于锁定项目依赖的版本
+```sum
+cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
+cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
+cloud.google.com/go v0.37.4 h1:glPeL3BQJsbF6aIIYfZizMwc5LTYz250bDMjttbBGAU=
+cloud.google.com/go v0.37.4/go.mod h1:NHPJ89PdicEuT9hdPXMROBD91xc5uRDxsMtSB16k7hw=
+```
+go.sum文件的格式：
+<module> <version>/go.mod <hash>
+或
+<module> <version> <hash>
+<module> <version>/go.mod <hash>
+
+其中，module是依赖的路径，version是依赖的版本号。hash是以h1:开头的字符串，表示生成checksum的算法是第一版的hash算法（sha256）。
+
+go mod 命令还有其他 子命令去管理module
+```sh
+go mod <command> [arguments]
+
+```
+download   download modules to local cache
+edit       edit go.mod from tools or scripts
+graph      print module requirement graph
+init       initialize new module in current directory
+tidy       add missing and remove unused module
+vendor     make vendored copy of dependencies
+verify     verify dependencies have expected content
+why        explain why packages or modules are needed
+
+eg:
+
+```shell
+go mod edit -fmt # 格式化go.mod文件
+go mod edit -require github.com/hashicorp/golang-lru@v0.5.3 # 添加当前的包到go.mod
+go mod edit -exclude github.com/hashicorp/golang-lru@v0.5.3 # 添加exclude
+go mod edit -dropexclude github.com/hashicorp/golang-lru@v0.5.3 # 删除exclude
+
+go help mod edit # 查看更多edit 命令项
+
+
+go mod vendor # 将依赖放在当前项目的vendor目录下，会存在多份依赖
+
+# 列出依赖
+go mod list -m all
+
+go get 
+go build
+
+```
+
